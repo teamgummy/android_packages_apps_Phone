@@ -771,6 +771,7 @@ public class CallNotifier extends Handler
                 .enableNotificationAlerts(state == Phone.State.IDLE);
 
         Phone fgPhone = mCM.getFgPhone();
+        if (fgPhone != null) {
         if (fgPhone.getPhoneType() == Phone.PHONE_TYPE_CDMA) {
             if ((fgPhone.getForegroundCall().getState() == Call.State.ACTIVE)
                     && ((mPreviousCdmaCallState == Call.State.DIALING)
@@ -783,6 +784,7 @@ public class CallNotifier extends Handler
                 stopSignalInfoTone();
             }
             mPreviousCdmaCallState = fgPhone.getForegroundCall().getState();
+        }
         }
 
         // Have the PhoneApp recompute its mShowBluetoothIndication
@@ -844,6 +846,7 @@ public class CallNotifier extends Handler
                                     IN_CALL_NOTIFICATION_UPDATE_DELAY);
         }
 
+        if (fgPhone != null) {
         if (fgPhone.getPhoneType() == Phone.PHONE_TYPE_CDMA) {
             Connection c = fgPhone.getForegroundCall().getLatestConnection();
             if ((c != null) && (PhoneNumberUtils.isLocalEmergencyNumber(c.getAddress(),
@@ -885,6 +888,7 @@ public class CallNotifier extends Handler
                     mInCallRingbackTonePlayer = null;
                 }
             }
+        }
         }
     }
 
